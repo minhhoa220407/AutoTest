@@ -1,0 +1,115 @@
+appId: com.aichat.smartassistant.aiphoto.aigenerate
+---
+# Smoke test cho AI Chat tren may that.
+# Gia dinh app da qua onboarding va dang mo o Discovery/Home.
+
+- extendedWaitUntil:
+    visible:
+      text: ".*(AI Chat|AI CHAT|Start Chat|Discovery).*"
+    timeout: 20000
+
+# Tu Discovery vao AI Chat
+- runFlow:
+    when:
+      visible:
+        text: ".*Start Chat.*"
+    commands:
+      - tapOn:
+          text: ".*Start Chat.*"
+
+# Neu dang o tab khac, thu vao tab Chat roi quay ve luong chat
+- runFlow:
+    when:
+      visible:
+        text: ".*Chat.*"
+    commands:
+      - tapOn:
+          text: "^Chat$"
+
+- extendedWaitUntil:
+    visible:
+      text: ".*(Ask anything|How can i help you|How can I help you).*"
+    timeout: 20000
+
+- assertVisible:
+    text: ".*Ask anything.*"
+
+- assertVisible:
+    text: ".*google/.*"
+
+# Suggested prompt flow
+- tapOn:
+    text: "^HAVE FUN$"
+
+- extendedWaitUntil:
+    visible:
+      text: ".*Tell me a funny joke.*"
+    timeout: 10000
+
+- tapOn:
+    text: "^Tell me a funny joke$"
+
+- extendedWaitUntil:
+    visible:
+      text: "^Send$"
+    timeout: 10000
+
+- assertVisible:
+    text: ".*Tell me a funny joke.*"
+
+- tapOn:
+    text: "^Send$"
+
+- extendedWaitUntil:
+    visible:
+      text: ".*Tell me a funny joke.*"
+    timeout: 15000
+
+- extendedWaitUntil:
+    visible:
+      text: ".*Would you:.*"
+    timeout: 30000
+
+- assertVisible:
+    id: "com.aichat.smartassistant.aiphoto.aigenerate:id/btn_copy"
+
+- assertVisible:
+    id: "com.aichat.smartassistant.aiphoto.aigenerate:id/btn_like"
+
+- assertVisible:
+    id: "com.aichat.smartassistant.aiphoto.aigenerate:id/btn_dislike"
+
+- assertVisible:
+    id: "com.aichat.smartassistant.aiphoto.aigenerate:id/btn_resend"
+
+- assertVisible:
+    id: "com.aichat.smartassistant.aiphoto.aigenerate:id/btn_report"
+
+# Manual input flow
+- tapOn:
+    id: "com.aichat.smartassistant.aiphoto.aigenerate:id/tv_input_placeholder"
+
+- inputText: "Xin chao, ban la ai?"
+
+- extendedWaitUntil:
+    visible:
+      text: "^Send$"
+    timeout: 10000
+
+- tapOn:
+    text: "^Send$"
+
+- extendedWaitUntil:
+    visible:
+      text: ".*Xin chao, ban la ai\\?.*"
+    timeout: 15000
+
+- extendedWaitUntil:
+    visible:
+      text: ".*(Chao ban|Chào bạn|Toi la|Tôi là).*"
+    timeout: 30000
+
+- assertVisible:
+    text: ".*Ask anything.*"
+
+- takeScreenshot: "ai-chat-smoke-live"
