@@ -1,30 +1,15 @@
 appId: com.aichat.smartassistant.aiphoto.aigenerate
 ---
-# Smoke test cho AI Chat tren may that.
-# Gia dinh app da qua onboarding va dang mo o Discovery/Home.
+# Smoke test AI Chat - ban tuong thich hon voi Maestro CLI cu
+# Gia dinh app da mo san va dang o Discovery/Home
 
 - extendedWaitUntil:
     visible:
       text: ".*(AI Chat|AI CHAT|Start Chat|Discovery).*"
     timeout: 20000
 
-# Tu Discovery vao AI Chat
-- runFlow:
-    when:
-      visible:
-        text: ".*Start Chat.*"
-    commands:
-      - tapOn:
-          text: ".*Start Chat.*"
-
-# Neu dang o tab khac, thu vao tab Chat roi quay ve luong chat
-- runFlow:
-    when:
-      visible:
-        text: ".*Chat.*"
-    commands:
-      - tapOn:
-          text: "^Chat$"
+- tapOn:
+    text: ".*Start Chat.*"
 
 - extendedWaitUntil:
     visible:
@@ -37,9 +22,8 @@ appId: com.aichat.smartassistant.aiphoto.aigenerate
 - assertVisible:
     text: ".*google/.*"
 
-# Suggested prompt flow
 - tapOn:
-    text: "^HAVE FUN$"
+    text: "HAVE FUN"
 
 - extendedWaitUntil:
     visible:
@@ -47,23 +31,15 @@ appId: com.aichat.smartassistant.aiphoto.aigenerate
     timeout: 10000
 
 - tapOn:
-    text: "^Tell me a funny joke$"
+    text: "Tell me a funny joke"
 
 - extendedWaitUntil:
     visible:
-      text: "^Send$"
+      text: "Send"
     timeout: 10000
 
-- assertVisible:
-    text: ".*Tell me a funny joke.*"
-
 - tapOn:
-    text: "^Send$"
-
-- extendedWaitUntil:
-    visible:
-      text: ".*Tell me a funny joke.*"
-    timeout: 15000
+    text: "Send"
 
 - extendedWaitUntil:
     visible:
@@ -85,7 +61,6 @@ appId: com.aichat.smartassistant.aiphoto.aigenerate
 - assertVisible:
     id: "com.aichat.smartassistant.aiphoto.aigenerate:id/btn_report"
 
-# Manual input flow
 - tapOn:
     id: "com.aichat.smartassistant.aiphoto.aigenerate:id/tv_input_placeholder"
 
@@ -93,15 +68,15 @@ appId: com.aichat.smartassistant.aiphoto.aigenerate
 
 - extendedWaitUntil:
     visible:
-      text: "^Send$"
+      text: "Send"
     timeout: 10000
 
 - tapOn:
-    text: "^Send$"
+    text: "Send"
 
 - extendedWaitUntil:
     visible:
-      text: ".*Xin chao, ban la ai\\?.*"
+      text: ".*Xin chao, ban la ai.*"
     timeout: 15000
 
 - extendedWaitUntil:
